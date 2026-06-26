@@ -129,6 +129,7 @@ export class HelpView extends LitElement {
             nextResponse: isMac ? 'Cmd+]' : 'Ctrl+]',
             scrollUp: isMac ? 'Cmd+Shift+Up' : 'Ctrl+Shift+Up',
             scrollDown: isMac ? 'Cmd+Shift+Down' : 'Ctrl+Shift+Down',
+            analyzeScreen: isMac ? 'Cmd+Shift+A' : 'Ctrl+Shift+A',
         };
     }
 

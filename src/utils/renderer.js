@@ -779,6 +779,14 @@ function handleShortcut(shortcutKey) {
         } else {
             captureManualScreenshot();
         }
+    } else if (shortcutKey === 'analyzeScreen') {
+        if (currentView === 'assistant') {
+            const el = cheatingDaddy.element();
+            const assistantView = el.shadowRoot ? el.shadowRoot.querySelector('assistant-view') : el.querySelector('assistant-view');
+            if (assistantView && typeof assistantView.handleScreenAnswer === 'function') {
+                assistantView.handleScreenAnswer();
+            }
+        }
     }
 }
 

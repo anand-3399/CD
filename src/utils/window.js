@@ -105,6 +105,7 @@ function getDefaultKeybinds() {
         scrollUp: isMac ? 'Cmd+Shift+Up' : 'Ctrl+Shift+Up',
         scrollDown: isMac ? 'Cmd+Shift+Down' : 'Ctrl+Shift+Down',
         emergencyErase: isMac ? 'Cmd+Shift+E' : 'Ctrl+Shift+E',
+        analyzeScreen: isMac ? 'Cmd+Shift+A' : 'Ctrl+Shift+A',
     };
 }
 
@@ -289,6 +290,29 @@ function updateGlobalShortcuts(keybinds, mainWindow, sendToRenderer, geminiSessi
             console.log(`Registered emergencyErase: ${keybinds.emergencyErase}`);
         } catch (error) {
             console.error(`Failed to register emergencyErase (${keybinds.emergencyErase}):`, error);
+        }
+    }
+
+    // Register analyze screen shortcut
+    if (keybinds.analyzeScreen) {
+        try {
+            globalShortcut.register(keybinds.analyzeScreen, () => {
+                console.log('Analyze screen shortcut triggered');
+                if (mainWindow && !mainWindow.isDestroyed()) {
+                    mainWindow.webContents.executeJavaScript(`
+                        try {
+                            if (window.cheatingDaddy && typeof window.cheatingDaddy.handleShortcut === 'function') {
+                                window.cheatingDaddy.handleShortcut('analyzeScreen');
+                            }
+                        } catch (e) {
+                            console.error('Error handling analyze screen shortcut:', e);
+                        }
+                    `);
+                }
+            });
+            console.log(`Registered analyzeScreen: ${keybinds.analyzeScreen}`);
+        } catch (error) {
+            console.error(`Failed to register analyzeScreen (${keybinds.analyzeScreen}):`, error);
         }
     }
 }
