@@ -154,6 +154,7 @@ export class HelpView extends LitElement {
             ['Next Response', this.keybinds.nextResponse],
             ['Scroll Response Up', this.keybinds.scrollUp],
             ['Scroll Response Down', this.keybinds.scrollDown],
+            ['Analyze Screen', this.keybinds.analyzeScreen],
         ];
 
         return html`
